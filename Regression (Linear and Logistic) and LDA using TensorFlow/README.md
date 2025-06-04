@@ -30,3 +30,8 @@ Given data on university applicants, predict the **probability (Chance of Admit)
 3. **Logistic Regression**  
    - For binary classification (e.g., admit vs not admit based on threshold).
 
+
+## 🔗 References
+1. https://www.kaggle.com/code/arifali77/linear-and-logistic-regression
+2. https://www.geeksforgeeks.org/ml-logistic-regression-using-tensorflow/
+3. https://scikit-learn.org/dev/modules/generated/sklearn.discriminant_analysis.LinearDiscriminantAnalysis.html

@@ -8,3 +8,7 @@ This project focuses on building classification models to predict in-hospital mo
 
 Dataset:
 Vital signs data for patients (221 and 230) provided in CSV format.
+
+## 🔗 References
+1. https://www.tensorflow.org/decision_forests/tutorials/beginner_colab
+2. https://www.kaggle.com/code/fareselmenshawii/decision-tree-from-scratch
