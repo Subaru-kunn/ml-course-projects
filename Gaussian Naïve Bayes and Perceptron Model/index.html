@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Type Classification</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 400px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; text-align: center; }
+        input, select, button { margin-top: 10px; width: 100%; padding: 8px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Diabetes Type Classification</h2>
+        <form id="predictionForm">
+            <input type="number" id="age" placeholder="Age" required><br>
+            <input type="number" id="glucose" placeholder="Blood Sugar Level" required><br>
+            <input type="number" id="insulin" placeholder="Insulin Level" required><br>
+            <input type="number" id="bmi" placeholder="BMI" required><br>
+            <select id="modelType">
+                <option value="naive_bayes">Naive Bayes</option>
+                <option value="perceptron">Perceptron</option>
+            </select><br>
+            <button type="button" onclick="makePrediction()">Submit</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        async function makePrediction() {
+    // Collect input values
+    const age = document.getElementById('age').value;
+    const glucose = document.getElementById('glucose').value;
+    const insulin = document.getElementById('insulin').value;
+    const bmi = document.getElementById('bmi').value;
+    const modelType = document.getElementById('modelType').value;
+
+    try {
+        // Send a POST request to the Flask backend
+        const response = await fetch('http://127.0.0.1:5000/predict', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                age: age,
+                glucose: glucose,
+                insulin: insulin,
+                bmi: bmi,
+                model_type: modelType
+            })
+        });
+
+        // Check if response is ok
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
+
+        // Parse the JSON response
+        const result = await response.json();
+
+        // Display the result on the page
+        if (result.diabetes_type !== undefined) {
+            // Interpret the diabetes type
+            const diabetesMessage = result.diabetes_type === 1 ? "Predicted: Type 1 Diabetes" : "Predicted: Type 0 Diabetes";
+            document.getElementById('result').innerText = diabetesMessage;
+        } else {
+            document.getElementById('result').innerText = `Error: ${result.error}`;
+        }
+
+    } catch (error) {
+        console.error("Error:", error);
+        document.getElementById('result').innerText = "Failed to fetch prediction. Check the console for more details.";
+    }
+}
+
+
+    </script>
+</body>
+</html>
