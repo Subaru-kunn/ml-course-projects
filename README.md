@@ -1,2 +1,2 @@
-📘 ML Course Projects (BITS F464)
+##📘 ML Course Projects (BITS F464)
 This repo contains the different machine learning projects I worked on during my ML course at BITS Pilani (BITS F464). Each folder has a separate project exploring different ML concepts like regression, classification, decision trees, CNNs and LSTMs — all implemented using Python and common libraries like scikit-learn, pandas and TensorFlow/Keras.
